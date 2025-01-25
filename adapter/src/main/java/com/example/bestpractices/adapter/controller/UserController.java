@@ -39,4 +39,11 @@ public class UserController {
         userService.deleteUser(email);
         return ResponseEntity.noContent().build();
     }
+
+    // Use Case 5: save a User
+    @PostMapping()
+    public ResponseEntity<String> saveUser(@RequestBody UserDto userDto) {
+
+        return ResponseEntity.ok("User with email "+userService.saveUser(userDto)+" Successfully saved");
+    }
 }

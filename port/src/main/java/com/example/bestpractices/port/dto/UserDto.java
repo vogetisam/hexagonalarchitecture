@@ -6,6 +6,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String email;
+    private String phoneNumber;
     private List<AddressDto> addresses;
 
     // Getters and Setters
@@ -39,5 +40,13 @@ public class UserDto {
 
     public void setAddresses(List<AddressDto> addresses) {
         this.addresses = addresses;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

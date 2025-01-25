@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface UserRepositoryPort {
     Optional<UserDto> findByEmail(String email);
 
-    void save(UserDto userDto);
+    String save(UserDto userDto);
 
     void deleteByEmail(String email);
 }

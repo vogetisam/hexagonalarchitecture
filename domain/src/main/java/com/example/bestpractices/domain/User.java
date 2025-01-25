@@ -14,12 +14,11 @@ public class User {
     private final List<Address> addresses;
 
     // Constructor for initialization
-    public User(String firstName, String lastName, String email, String phoneNumber, List<Address> addresses) {
+    public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.addresses = addresses != null ? new ArrayList<>(addresses) : new ArrayList<>();
+        this.addresses = new ArrayList<>();
     }
 
     // Getters

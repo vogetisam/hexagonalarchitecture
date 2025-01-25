@@ -1,5 +1,6 @@
 package com.example.bestpractices.infrastructure.adapter;
 
+import com.example.bestpractices.infrastructure.entity.UserEntity;
 import com.example.bestpractices.infrastructure.mapper.UserEntityMapper;
 import com.example.bestpractices.infrastructure.repository.UserRepository;
 import com.example.bestpractices.port.dto.UserDto;
@@ -24,8 +25,9 @@ public class UserPersistenceAdapter implements UserRepositoryPort {
     }
 
     @Override
-    public void save(UserDto userDto) {
-        userRepository.save(UserEntityMapper.toEntity(userDto));
+    public String save(UserDto userDto) {
+        UserEntity userEntity = userRepository.save(UserEntityMapper.toEntity(userDto));
+        return userEntity.getEmail();
     }
 
 

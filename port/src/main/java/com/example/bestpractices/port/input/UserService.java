@@ -15,4 +15,7 @@ public interface UserService {
 
     // Use Case 4: Delete User
     void deleteUser(String email);
+
+    // Use Case 5: Save User
+    String saveUser(UserDto userDto);
 }

@@ -5,19 +5,40 @@ import com.example.bestpractices.infrastructure.entity.UserEntity;
 import com.example.bestpractices.port.dto.AddressDto;
 import com.example.bestpractices.port.dto.UserDto;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserEntityMapper {
 
     public static UserEntity toEntity(UserDto dto) {
-        UserEntity entity = new UserEntity();
-        entity.setFirstName(dto.getFirstName());
-        entity.setLastName(dto.getLastName());
-        entity.setEmail(dto.getEmail());
-        entity.setAddresses(dto.getAddresses().stream()
-                .map(UserEntityMapper::toEntity)
-                .collect(Collectors.toList()));
-        return entity;
+        UserEntity user = new UserEntity();
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setEmail(dto.getEmail());
+
+        List<AddressEntity> addresses = dto.getAddresses().stream()
+                .map(addressDto -> {
+                    AddressEntity address = toEntity(addressDto);
+                    address.setUser(user); // Set the user association
+                    return address;
+                })
+                .collect(Collectors.toList());
+
+        user.setAddresses(addresses);
+        return user;
+    }
+
+    public static AddressEntity toEntity(AddressDto dto) {
+        AddressEntity address = new AddressEntity();
+        address.setStreetAddress(dto.getStreetAddress());
+        address.setCity(dto.getCity());
+        address.setState(dto.getState());
+        address.setZip(dto.getZip());
+        address.setCountry(dto.getCountry());
+        address.setLocality(dto.getLocality());
+        address.setDoorNumber(String.valueOf(dto.getDoorNumber()));
+        return address;
     }
 
     public static UserDto toDto(UserEntity entity) {
@@ -31,14 +52,6 @@ public class UserEntityMapper {
         return dto;
     }
 
-    private static AddressEntity toEntity(AddressDto dto) {
-        AddressEntity entity = new AddressEntity();
-        entity.setStreetAddress(dto.getStreetAddress());
-        entity.setCity(dto.getCity());
-        entity.setState(dto.getState());
-        entity.setZip(dto.getZip());
-        return entity;
-    }
 
     private static AddressDto toDto(AddressEntity entity) {
         AddressDto dto = new AddressDto();
